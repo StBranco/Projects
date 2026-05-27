@@ -2,11 +2,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: background-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
 }
 
 body {
   font-family: 'Caudex', serif;
-  background: url('imagem/Sky.png') center/cover fixed no-repeat;
+  background: linear-gradient(135deg, #87CEEB 0%, #E0F6FF 100%);
   color: #1a1a1a;
   line-height: 1.6;
   transition: background 0.6s ease, color 0.6s ease;
@@ -14,33 +15,10 @@ body {
   overflow-x: hidden;
 }
 
-body::before {
-  display: none;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
-}
-
-body::after {
-  content: '';
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 150px;
-  background: linear-gradient(to top, rgba(144, 202, 249, 0.3), transparent);
-  pointer-events: none;
-  z-index: 1;
-}
-
 body.dark-mode {
-  background: url('imagem/night.png');
+  background: linear-gradient(135deg, #000033 0%, #000066 50%, #001a99 100%);
   background-attachment: fixed;
   color: ghostwhite;
-  position: relative;
-  overflow-x: hidden;
 }
 
 body.dark-mode * {
@@ -53,14 +31,24 @@ body.dark-mode * {
   50% { opacity: 1; }
 }
 
-body.dark-mode * {
-  position: relative;
-  z-index: 2;
+@keyframes slideInHero {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-body.dark-mode * {
-  position: relative;
-  z-index: 2;
+@keyframes floatImage {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 h1, h2, h3 {
@@ -78,6 +66,7 @@ nav {
   top: 0;
   z-index: 100;
   backdrop-filter: blur(10px);
+  transition: background 0.5s ease, box-shadow 0.5s ease;
 }
 
 body.dark-mode nav {
@@ -167,21 +156,11 @@ body.dark-mode #toggle-dark {
   margin: 20px;
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: background 0.5s ease;
 }
 
 body.dark-mode #hero {
-  background: rgba(20, 40, 80, 0.9);
-}
-
-@keyframes slideInHero {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  background: rgba(20, 40, 80, 0.4);
 }
 
 #hero img {
@@ -191,15 +170,6 @@ body.dark-mode #hero {
   object-fit: cover;
   margin-bottom: 20px;
   animation: floatImage 3s ease-in-out infinite;
-}
-
-@keyframes floatImage {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
 }
 
 #hero h1 {
@@ -221,46 +191,87 @@ body.dark-mode #hero h2 {
   color: #64B5F6;
 }
 
-#sobre {
+#sobre, #projetos {
   padding: 40px 20px;
   max-width: 800px;
   margin: 20px auto;
   background: rgba(255, 255, 255, 0.85);
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: background 0.5s ease;
 }
 
-#projetos {
-  padding: 40px 20px;
-  max-width: 800px;
-  margin: 20px auto;
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-body.dark-mode #sobre {
-  background: rgba(20, 40, 80, 0.4);
-}
-
+body.dark-mode #sobre,
 body.dark-mode #projetos {
   background: rgba(20, 40, 80, 0.4);
 }
 
-footer {
-  background: rgba(255, 255, 255, 0.9);
-  text-align: center;
-  padding: 20px;
+#skills {
+  padding: 60px 20px;
+  background: rgba(255, 255, 255, 0.05);
   margin-top: 40px;
+  transition: background 0.5s ease;
 }
 
-body.dark-mode footer {
-  background: rgba(20, 40, 80, 0.9);
+body.dark-mode #skills {
+  background: rgba(0, 0, 0, 0.1);
 }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  max-width: 800px;
+  margin: 30px auto 0;
+}
+
+.skill-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease, color 0.5s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-mode .skill-card {
+  background: rgba(255, 255, 255, 0.1);
+  color: ghostwhite;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .skill-card:hover {
+  box-shadow: 0 8px 12px rgba(74, 144, 226, 0.4);
+}
+
+.skill-card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #0066cc;
+}
+
+body.dark-mode .skill-card h3 {
+  color: ghostwhite;
+}
+
+.skill-card p {
+  font-size: 14px;
+  color: #666;
+}
+
+body.dark-mode .skill-card p {
+  color: #b0c4de;
+}
+
 #contacto {
   padding: 60px 20px;
   text-align: center;
-  background: rgba(255, 255, 255, 0.0);
+  background: rgba(255, 255, 255, 0.1);
   margin-top: 40px;
 }
 
@@ -297,86 +308,15 @@ body.dark-mode .btn-contacto:hover {
   box-shadow: 0 10px 30px rgba(74, 144, 226, 0.6);
   transform: scale(1.05);
 }
-skills h2{
+
+footer {
+  background: rgba(255, 255, 255, 0.9);
   text-align: center;
-}
-#skills {
-  padding: 60px 20px;
-  background: rgba(255, 255, 255, 0.05);
-  margin-top: 40px;
-}
-
-body.dark-mode #skills {
-  background: rgba(0, 0, 0, 0.1);
-}
-
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 20px;
-  max-width: 800px;
-  margin: 30px auto 0;
-}
-
-.skill-card {
-  background: white;
   padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.skill-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-}
-
-body.dark-mode .skill-card {
-  background: rgba(255, 255, 255, 0.1);
-  color: ghostwhite;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-body.dark-mode .skill-card:hover {
-  box-shadow: 0 8px 12px rgba(74, 144, 226, 0.4);
-}
-
-.skill-card h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: #0066cc;
-}
-
-body.dark-mode .skill-card h3 {
-  color: ghostwhite;
-}
-
-.skill-card p {
-  font-size: 14px;
-  color: #666;
-}
-
-body.dark-mode .skill-card p {
-  color: #b0c4de
-}
-
-*{
-  transition: background-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
-}
-
-nav {
-  transition: background 0.5s ease, box-shadow 0.5s ease;
-}
-
-#hero, #sobre, #projetos, #skills, #contacto {
+  margin-top: 40px;
   transition: background 0.5s ease;
 }
 
-.skill-card {
-  transition: background 0.5s ease, color 0.5s ease, box-shadow 0.5s ease, transform 0.3s ease;
-}
-
-.btn-contacto {
-  transition: background 0.5s ease, box-shadow 0.5s ease, transform 0.3s ease;
+body.dark-mode footer {
+  background: rgba(20, 40, 80, 0.9);
 }
