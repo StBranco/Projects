@@ -18,7 +18,7 @@ body {
 body.dark-mode {
   background: linear-gradient(135deg, #000033 0%, #000066 50%, #001a99 100%);
   background-attachment: fixed;
-  color: ghostwhite;
+  color: white;
 }
 
 body.dark-mode * {
